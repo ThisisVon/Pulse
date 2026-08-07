@@ -3,7 +3,7 @@
 
 <head>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>Pulse</title>
 
@@ -15,7 +15,7 @@
 <body>
 
 
-<!-- Splash Screen -->
+<!-- APP OPEN SPLASH -->
 
 <div class="splash">
 
@@ -27,16 +27,16 @@
 
 
 
-
 <div class="app">
 
 
-<!-- HOME -->
 
-<div id="home" class="page">
+<!-- HOME PAGE -->
+
+<section class="page active-page" id="home">
 
 
-<section class="player">
+<div class="player">
 
 
 <div class="album"></div>
@@ -56,17 +56,15 @@
 
 
 
+
 <div class="controls">
 
 
 <button class="skip">
 
 <svg viewBox="0 0 24 24">
-
 <path d="M11 5L2 12L11 19V5Z"/>
-
 <path d="M22 5L13 12L22 19V5Z"/>
-
 </svg>
 
 </button>
@@ -74,13 +72,20 @@
 
 
 
+<button class="play-button">
 
-<button class="play">
 
-
-<svg viewBox="0 0 24 24">
+<svg class="play-icon" viewBox="0 0 24 24">
 
 <path d="M8 5V19L19 12L8 5Z"/>
+
+</svg>
+
+
+<svg class="pause-icon hidden-icon" viewBox="0 0 24 24">
+
+<rect x="6" y="5" width="4" height="14" rx="2"/>
+<rect x="14" y="5" width="4" height="14" rx="2"/>
 
 </svg>
 
@@ -93,19 +98,15 @@
 
 <button class="skip">
 
-
 <svg viewBox="0 0 24 24">
-
-
 <path d="M13 5L22 12L13 19V5Z"/>
-
 <path d="M2 5L11 12L2 19V5Z"/>
-
-
 </svg>
 
-
 </button>
+
+
+</div>
 
 
 </div>
@@ -114,54 +115,114 @@
 </section>
 
 
+
+
+
+<!-- EXPLORE PAGE -->
+
+<section class="page" id="explore">
+
+
+<h1>Explore</h1>
+
+
+<div class="music-card">
+
+<h3>Trending Now</h3>
+
+<p>Discover new music</p>
+
 </div>
 
 
 
+<div class="music-card">
+
+<h3>Recommended</h3>
+
+<p>Made for you</p>
+
+</div>
 
 
-<!-- SEARCH -->
+</section>
 
-<div id="search" class="page hidden">
+
+
+
+
+
+
+<!-- SEARCH PAGE -->
+
+<section class="page" id="search">
 
 
 <h1>Search</h1>
 
-<p>Find your music</p>
+
+
+<div class="search-box">
+
+
+<svg viewBox="0 0 24 24">
+
+<circle cx="10" cy="10" r="6"/>
+
+<path d="M14 14L21 21"/>
+
+</svg>
+
+
+
+<input placeholder="Search songs, artists...">
 
 
 </div>
 
 
+</section>
 
 
 
-<!-- LIBRARY -->
 
-<div id="library" class="page hidden">
+
+
+
+<!-- LIBRARY PAGE -->
+
+<section class="page" id="library">
 
 
 <h1>Library</h1>
 
-<p>Your saved songs</p>
 
+<div class="music-card">
+
+<h3>Your Music</h3>
+
+<p>Your saved songs appear here</p>
 
 </div>
 
 
+</section>
 
 
 
 
 
-<!-- NAVIGATION -->
 
+
+
+
+<!-- BOTTOM NAV -->
 
 <nav>
 
 
-<button class="active">
 
+<button class="active">
 
 <svg viewBox="0 0 24 24">
 
@@ -171,9 +232,7 @@
 
 </svg>
 
-
 <span>Home</span>
-
 
 </button>
 
@@ -183,22 +242,39 @@
 
 <button>
 
-
 <svg viewBox="0 0 24 24">
 
+<path d="M12 3L14.5 9.5L21 12L14.5 14.5L12 21L9.5 14.5L3 12L9.5 9.5Z"/>
+
+</svg>
+
+
+<span>Explore</span>
+
+</button>
+
+
+
+
+
+
+
+<button>
+
+<svg viewBox="0 0 24 24">
 
 <circle cx="10" cy="10" r="6"/>
 
 <path d="M14 14L21 21"/>
-
 
 </svg>
 
 
 <span>Search</span>
 
-
 </button>
+
+
 
 
 
@@ -206,9 +282,7 @@
 
 <button>
 
-
 <svg viewBox="0 0 24 24">
-
 
 <path d="M9 18V5L20 3V16"/>
 
@@ -216,17 +290,17 @@
 
 <circle cx="17" cy="16" r="3"/>
 
-
 </svg>
 
 
 <span>Library</span>
 
-
 </button>
 
 
+
 </nav>
+
 
 
 
