@@ -73,19 +73,19 @@ let playing = false;
 if(playButton){
 
 
-playButton.addEventListener("click", ()=>{
+    playButton.addEventListener("click", ()=>{
 
 
-    playing = !playing;
+        playing = !playing;
 
 
-    playButton.classList.toggle(
-        "playing",
-        playing
-    );
+        playButton.classList.toggle(
+            "playing",
+            playing
+        );
 
 
-});
+    });
 
 
 }
@@ -108,8 +108,6 @@ const durationText = document.getElementById("duration");
 
 
 
-// Fake song length for now
-
 const songLength = 210;
 
 
@@ -117,32 +115,36 @@ const songLength = 210;
 if(progressBar){
 
 
+
 durationText.textContent = formatTime(songLength);
+
+
+
+progressBar.max = songLength;
 
 
 
 progressBar.addEventListener("input", ()=>{
 
 
-    const value = Number(progressBar.value);
+const value = Number(progressBar.value);
 
 
 
-    currentTime.textContent = formatTime(value);
+currentTime.textContent = formatTime(value);
 
 
 
-    const percent = (value / songLength) * 100;
+const percent = (value / songLength) * 100;
 
 
 
-    progressBar.style.background = `linear-gradient(
-        to right,
-        white ${percent}%,
-        #333 ${percent}%,
-        #333 100%
-    )`;
-
+progressBar.style.background = `linear-gradient(
+to right,
+white ${percent}%,
+#333 ${percent}%,
+#333 100%
+)`;
 
 
 });
@@ -150,8 +152,6 @@ progressBar.addEventListener("input", ()=>{
 
 
 }
-
-
 
 
 
@@ -171,7 +171,6 @@ return `${minutes}:${remaining
 
 
 }
-
 
 
 
