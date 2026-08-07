@@ -28,6 +28,31 @@ sans-serif;
 
 
 
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:500px;
+
+height:500px;
+
+background:#333;
+
+border-radius:50%;
+
+filter:blur(150px);
+
+top:-250px;
+
+left:-150px;
+
+opacity:.35;
+
+}
+
+
 
 /* SPLASH */
 
@@ -41,9 +66,9 @@ background:#080808;
 
 display:flex;
 
-justify-content:center;
-
 align-items:center;
+
+justify-content:center;
 
 z-index:9999;
 
@@ -75,6 +100,7 @@ transform:scale(.95);
 
 }
 
+
 50%{
 
 opacity:1;
@@ -82,6 +108,7 @@ opacity:1;
 transform:scale(1.06);
 
 }
+
 
 100%{
 
@@ -92,7 +119,6 @@ transform:scale(.95);
 }
 
 }
-
 
 
 
@@ -122,7 +148,6 @@ visibility:hidden;
 
 /* APP */
 
-
 .app{
 
 height:100dvh;
@@ -140,7 +165,6 @@ overflow:hidden;
 
 
 /* PAGES */
-
 
 .page{
 
@@ -193,18 +217,17 @@ pointer-events:auto;
 
 /* PLAYER */
 
-
 .player{
 
 height:100%;
 
 display:flex;
 
+flex-direction:column;
+
 justify-content:center;
 
 align-items:center;
-
-flex-direction:column;
 
 padding-bottom:80px;
 
@@ -220,7 +243,6 @@ height:270px;
 
 border-radius:45px;
 
-
 background:
 
 linear-gradient(
@@ -234,13 +256,11 @@ linear-gradient(
 );
 
 
-
 box-shadow:
 
 0 30px 80px black;
 
 }
-
 
 
 
@@ -266,7 +286,6 @@ color:#999;
 
 
 
-
 .progress{
 
 width:85%;
@@ -285,9 +304,9 @@ margin:25px;
 
 .progress div{
 
-height:100%;
-
 width:45%;
+
+height:100%;
 
 background:white;
 
@@ -302,7 +321,6 @@ border-radius:20px;
 
 /* CONTROLS */
 
-
 .controls{
 
 display:flex;
@@ -315,7 +333,6 @@ gap:40px;
 
 
 
-
 button{
 
 border:none;
@@ -324,21 +341,22 @@ background:none;
 
 color:white;
 
+padding:0;
+
 }
 
 
 
 
 
-/* ROUND GLASS PLAY BUTTON */
 
+/* PLAY BUTTON */
 
 .play-button{
 
 width:82px;
 
 height:82px;
-
 
 border-radius:50%;
 
@@ -348,17 +366,14 @@ background:
 rgba(255,255,255,.15);
 
 
-
-backdrop-filter:
-
-blur(25px);
+backdrop-filter:blur(25px);
 
 
 display:flex;
 
-align-items:center;
-
 justify-content:center;
+
+align-items:center;
 
 
 overflow:hidden;
@@ -379,7 +394,6 @@ position:relative;
 
 
 
-
 .play-icon,
 .pause-icon{
 
@@ -397,13 +411,11 @@ fill:white;
 
 transition:
 
-opacity .25s ease,
+opacity .3s ease,
 
 transform .35s cubic-bezier(.22,1,.36,1);
 
 }
-
-
 
 
 
@@ -414,7 +426,6 @@ opacity:0;
 transform:scale(.7);
 
 }
-
 
 
 
@@ -440,17 +451,15 @@ transform:scale(1);
 
 
 
-.skip svg{
+/* ALL ICONS */
 
-width:34px;
-
-height:34px;
-
-
-fill:white;
-
+svg{
 
 stroke:white;
+
+stroke-width:2.3;
+
+stroke-linecap:round;
 
 stroke-linejoin:round;
 
@@ -458,10 +467,52 @@ stroke-linejoin:round;
 
 
 
+nav svg{
+
+width:27px;
+
+height:27px;
+
+fill:none;
+
+}
+
+
+
+.controls svg{
+
+fill:white;
+
+stroke:none;
+
+}
+
+
+
+.skip svg{
+
+width:34px;
+
+height:34px;
+
+}
+
+
+
+.play-icon,
+.pause-icon{
+
+fill:white;
+
+}
+
+
+
+
+
 
 
 /* CARDS */
-
 
 .music-card{
 
@@ -470,6 +521,7 @@ width:90%;
 padding:20px;
 
 margin:15px;
+
 
 border-radius:30px;
 
@@ -492,8 +544,8 @@ border:
 
 
 
-/* SEARCH */
 
+/* SEARCH */
 
 .search-box{
 
@@ -527,12 +579,6 @@ width:25px;
 
 height:25px;
 
-fill:none;
-
-stroke:white;
-
-stroke-width:2;
-
 }
 
 
@@ -560,7 +606,6 @@ width:100%;
 
 /* NAV */
 
-
 nav{
 
 position:absolute;
@@ -575,6 +620,13 @@ bottom:20px;
 height:75px;
 
 
+display:flex;
+
+justify-content:space-around;
+
+align-items:center;
+
+
 border-radius:35px;
 
 
@@ -583,20 +635,12 @@ background:
 rgba(255,255,255,.1);
 
 
-
 backdrop-filter:blur(35px);
 
 
 border:
 
 1px solid rgba(255,255,255,.18);
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-around;
 
 }
 
@@ -612,6 +656,7 @@ align-items:center;
 
 gap:5px;
 
+
 opacity:.45;
 
 }
@@ -621,14 +666,6 @@ opacity:.45;
 nav button.active{
 
 opacity:1;
-
-}
-
-
-
-nav span{
-
-font-size:26px;
 
 }
 
