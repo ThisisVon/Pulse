@@ -26,6 +26,32 @@ sans-serif;
 
 
 
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:500px;
+
+height:500px;
+
+background:#333;
+
+border-radius:50%;
+
+filter:blur(150px);
+
+top:-250px;
+
+left:-150px;
+
+opacity:.45;
+
+}
+
+
+
 /* SPLASH */
 
 .splash{
@@ -47,6 +73,7 @@ z-index:9999;
 }
 
 
+
 .pulse-logo{
 
 font-size:60px;
@@ -55,15 +82,7 @@ font-weight:700;
 
 letter-spacing:-3px;
 
-animation:pulseLogo 2s ease-in-out infinite;
-
-}
-
-
-
-.splash.hide{
-
-animation:splashFade .8s forwards;
+animation:pulseLogo 2.5s infinite ease-in-out;
 
 }
 
@@ -71,20 +90,41 @@ animation:splashFade .8s forwards;
 
 @keyframes pulseLogo{
 
+
 0%{
+
 opacity:.45;
+
 transform:scale(.95);
+
 }
+
 
 50%{
+
 opacity:1;
-transform:scale(1.05);
+
+transform:scale(1.06);
+
 }
 
+
 100%{
+
 opacity:.45;
+
 transform:scale(.95);
+
 }
+
+
+}
+
+
+
+.splash.hide{
+
+animation:splashFade 1.2s ease forwards;
 
 }
 
@@ -108,12 +148,11 @@ visibility:hidden;
 
 /* APP */
 
-
 .app{
 
-width:100%;
-
 height:100dvh;
+
+width:100%;
 
 position:relative;
 
@@ -153,16 +192,17 @@ align-items:center;
 
 opacity:0;
 
-transform:translateY(-20px);
+transform:translateY(-45px);
+
 
 pointer-events:none;
 
 
 transition:
 
-opacity .35s ease,
+opacity .75s cubic-bezier(.22,1,.36,1),
 
-transform .35s ease;
+transform .75s cubic-bezier(.22,1,.36,1);
 
 }
 
@@ -182,10 +222,7 @@ pointer-events:auto;
 
 
 
-
-
 /* PLAYER */
-
 
 .player{
 
@@ -205,6 +242,8 @@ padding-bottom:80px;
 
 
 
+
+
 .album{
 
 width:270px;
@@ -213,15 +252,85 @@ height:270px;
 
 border-radius:45px;
 
+
 background:
 
-linear-gradient(135deg,#222,#555);
+linear-gradient(
+
+135deg,
+
+#222,
+
+#555
+
+);
+
+
 
 box-shadow:
 
 0 30px 80px black;
 
+
 overflow:hidden;
+
+position:relative;
+
+}
+
+
+
+.album::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+
+background:
+
+linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.25),
+
+transparent
+
+);
+
+
+transform:translateX(-100%);
+
+
+animation:shine 5s infinite;
+
+}
+
+
+
+@keyframes shine{
+
+to{
+
+transform:translateX(100%);
+
+}
+
+}
+
+
+
+
+h1{
+
+margin-top:20px;
+
+font-size:34px;
 
 }
 
@@ -229,7 +338,9 @@ overflow:hidden;
 
 h2{
 
-margin:25px 0 5px;
+margin-top:25px;
+
+margin-bottom:5px;
 
 }
 
@@ -246,15 +357,21 @@ color:#999;
 
 
 
+
+/* PROGRESS */
+
 .progress{
 
 width:85%;
 
 height:6px;
 
+
 background:#333;
 
+
 border-radius:20px;
+
 
 margin:25px;
 
@@ -268,7 +385,9 @@ width:45%;
 
 height:100%;
 
+
 background:white;
+
 
 border-radius:20px;
 
@@ -278,8 +397,7 @@ border-radius:20px;
 
 
 
-/* BUTTONS */
-
+/* CONTROLS */
 
 .controls{
 
@@ -293,25 +411,42 @@ gap:40px;
 
 
 
+button{
+
+border:none;
+
+background:none;
+
+color:white;
+
+}
+
+
+
 .play-button{
 
-width:80px;
+width:82px;
 
-height:80px;
+height:82px;
+
 
 border-radius:50%;
 
-background:
-
-rgba(255,255,255,.15);
-
-backdrop-filter:blur(25px);
 
 display:flex;
 
 align-items:center;
 
 justify-content:center;
+
+
+background:
+
+rgba(255,255,255,.15);
+
+
+backdrop-filter:blur(25px);
+
 
 }
 
@@ -329,6 +464,7 @@ fill:white;
 
 
 
+
 .skip svg{
 
 width:34px;
@@ -338,6 +474,7 @@ height:34px;
 fill:white;
 
 }
+
 
 
 
@@ -358,23 +495,34 @@ display:none;
 
 width:90%;
 
+
 padding:20px;
+
 
 margin:15px;
 
+
 border-radius:30px;
+
+
 
 background:
 
 rgba(255,255,255,.08);
 
+
+
 backdrop-filter:blur(25px);
+
+
 
 border:
 
 1px solid rgba(255,255,255,.15);
 
 }
+
+
 
 
 
@@ -387,21 +535,47 @@ border:
 
 width:90%;
 
+
 height:60px;
 
+
 border-radius:30px;
+
+
 
 background:
 
 rgba(255,255,255,.1);
 
+
+
 display:flex;
+
 
 align-items:center;
 
+
 padding:0 20px;
 
+
 gap:15px;
+
+}
+
+
+
+.search-box svg{
+
+width:25px;
+
+height:25px;
+
+
+fill:none;
+
+stroke:white;
+
+stroke-width:2;
 
 }
 
@@ -427,30 +601,43 @@ width:100%;
 
 
 
-/* NAV */
+
+
+/* NAVIGATION */
 
 
 nav{
 
+
 position:absolute;
+
 
 left:20px;
 
+
 right:20px;
 
+
 bottom:20px;
+
 
 height:75px;
 
 
+
 display:flex;
 
-align-items:center;
 
 justify-content:space-around;
 
 
+align-items:center;
+
+
+
+
 border-radius:35px;
+
 
 
 background:
@@ -458,7 +645,10 @@ background:
 rgba(255,255,255,.1);
 
 
+
 backdrop-filter:blur(35px);
+
+
 
 
 border:
@@ -466,6 +656,7 @@ border:
 1px solid rgba(255,255,255,.18);
 
 }
+
 
 
 
@@ -478,6 +669,7 @@ flex-direction:column;
 align-items:center;
 
 gap:5px;
+
 
 opacity:.45;
 
@@ -493,6 +685,7 @@ opacity:1;
 
 
 
+
 nav svg{
 
 width:27px;
@@ -502,6 +695,7 @@ height:27px;
 fill:white;
 
 }
+
 
 
 nav span{
