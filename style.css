@@ -3,12 +3,16 @@ box-sizing:border-box;
 }
 
 
+
 body{
 
 margin:0;
+
 height:100vh;
 
-background:#080808;
+overflow:hidden;
+
+background:#090909;
 
 color:white;
 
@@ -17,7 +21,17 @@ font-family:
 BlinkMacSystemFont,
 sans-serif;
 
-overflow:hidden;
+}
+
+
+
+.app{
+
+height:100vh;
+
+padding:35px;
+
+position:relative;
 
 }
 
@@ -34,48 +48,50 @@ height:500px;
 
 background:#333;
 
+filter:blur(130px);
+
 border-radius:50%;
 
-filter:blur(120px);
-
 top:-200px;
-left:-150px;
 
-opacity:.5;
+left:-200px;
 
 }
 
 
 
-.app{
+.page{
 
-height:100vh;
+height:100%;
 
 display:flex;
 
 flex-direction:column;
 
+align-items:center;
+
 position:relative;
 
-padding:30px;
+z-index:1;
 
 }
 
 
 
-header{
+.hidden{
 
-text-align:center;
+display:none;
+
+}
+
+
+
+header h1{
+
+font-size:34px;
 
 }
 
-
-
-h1{
-
-font-size:32px;
-
-}
 
 
 
@@ -85,11 +101,11 @@ flex:1;
 
 display:flex;
 
-flex-direction:column;
+justify-content:center;
 
 align-items:center;
 
-justify-content:center;
+flex-direction:column;
 
 }
 
@@ -98,6 +114,7 @@ justify-content:center;
 .album{
 
 width:260px;
+
 height:260px;
 
 border-radius:35px;
@@ -108,20 +125,22 @@ background:
 linear-gradient(
 135deg,
 #222,
-#555
+#444
 );
+
 
 
 box-shadow:
 
-0 25px 60px black;
-
+0 30px 70px black;
 
 }
 
 
 
 h2{
+
+margin-top:30px;
 
 margin-bottom:5px;
 
@@ -131,7 +150,7 @@ margin-bottom:5px;
 
 p{
 
-color:#999;
+color:#888;
 
 }
 
@@ -145,22 +164,23 @@ height:5px;
 
 background:#333;
 
-border-radius:10px;
+border-radius:20px;
 
 margin:25px;
 
 }
 
 
+
 .progress div{
 
-width:40%;
+width:45%;
 
 height:100%;
 
 background:white;
 
-border-radius:10px;
+border-radius:20px;
 
 }
 
@@ -180,9 +200,9 @@ gap:35px;
 
 button{
 
-background:none;
-
 border:none;
+
+background:none;
 
 color:white;
 
@@ -192,18 +212,11 @@ color:white;
 
 svg{
 
-width:30px;
-height:30px;
+width:32px;
 
-fill:none;
+height:32px;
 
-stroke:white;
-
-stroke-width:2;
-
-stroke-linecap:round;
-
-stroke-linejoin:round;
+fill:white;
 
 }
 
@@ -212,6 +225,7 @@ stroke-linejoin:round;
 .play{
 
 width:75px;
+
 height:75px;
 
 border-radius:50%;
@@ -219,7 +233,7 @@ border-radius:50%;
 
 background:
 
-rgba(255,255,255,.12);
+rgba(255,255,255,.15);
 
 
 backdrop-filter:blur(20px);
@@ -234,11 +248,9 @@ width:38px;
 
 height:38px;
 
-fill:white;
-
-stroke:none;
-
 }
+
+
 
 
 
@@ -247,13 +259,17 @@ nav{
 
 position:absolute;
 
-bottom:25px;
 
 left:25px;
+
 right:25px;
 
 
+bottom:70px;
+
+
 height:80px;
+
 
 
 display:flex;
@@ -261,7 +277,6 @@ display:flex;
 justify-content:space-around;
 
 align-items:center;
-
 
 
 background:
@@ -278,7 +293,8 @@ border-radius:30px;
 
 border:
 
-1px solid rgba(255,255,255,.15);
+1px solid rgba(255,255,255,.2);
+
 
 }
 
@@ -292,9 +308,9 @@ flex-direction:column;
 
 align-items:center;
 
-gap:5px;
+gap:6px;
 
-opacity:.6;
+opacity:.5;
 
 }
 
@@ -303,6 +319,16 @@ opacity:.6;
 nav .active{
 
 opacity:1;
+
+}
+
+
+
+nav svg{
+
+width:28px;
+
+height:28px;
 
 }
 
