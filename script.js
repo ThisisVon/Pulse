@@ -12,14 +12,15 @@ const pages = [
 
 // PAGE SWITCHING
 
-tabs.forEach((tab, index)=>{
+tabs.forEach((tab,index)=>{
+
 
     tab.addEventListener("click", ()=>{
 
 
-        tabs.forEach(btn=>{
+        tabs.forEach(button=>{
 
-            btn.classList.remove("active");
+            button.classList.remove("active");
 
         });
 
@@ -36,7 +37,9 @@ tabs.forEach((tab, index)=>{
 
 
 
-        const selected = document.getElementById(pages[index]);
+        const selected =
+        document.getElementById(pages[index]);
+
 
 
         if(selected){
@@ -46,6 +49,7 @@ tabs.forEach((tab, index)=>{
         }
 
 
+
     });
 
 
@@ -57,48 +61,13 @@ tabs.forEach((tab, index)=>{
 
 
 
-// BUTTON PRESS ANIMATION FOR MOBILE
 
-document.querySelectorAll("button").forEach(button=>{
-
-
-    button.addEventListener("touchstart", ()=>{
-
-        button.style.transform = "scale(.88)";
-
-    });
+// PLAY / PAUSE MORPH
 
 
+const playButton =
+document.querySelector(".play-button");
 
-    button.addEventListener("touchend", ()=>{
-
-        button.style.transform = "scale(1)";
-
-    });
-
-
-
-    button.addEventListener("touchcancel", ()=>{
-
-        button.style.transform = "scale(1)";
-
-    });
-
-
-
-});
-
-
-
-
-
-
-
-
-// PLAY / PAUSE
-
-
-const playButton = document.querySelector(".play-button");
 
 
 let playing = false;
@@ -125,7 +94,62 @@ playing
 });
 
 
+
 }
+
+
+
+
+
+
+
+
+// BUTTON PRESS FEEDBACK
+
+document.querySelectorAll("button").forEach(button=>{
+
+
+button.addEventListener("touchstart",()=>{
+
+
+if(!button.classList.contains("play-button")){
+
+button.style.transform="scale(.88)";
+
+}
+
+
+
+});
+
+
+
+
+
+button.addEventListener("touchend",()=>{
+
+
+button.style.transform="scale(1)";
+
+
+});
+
+
+
+
+
+button.addEventListener("touchcancel",()=>{
+
+
+button.style.transform="scale(1)";
+
+
+});
+
+
+
+});
+
 
 
 
@@ -136,11 +160,16 @@ playing
 // PROGRESS BAR
 
 
-const progressBar = document.querySelector(".progress-bar");
+const progress =
+document.querySelector(".progress-bar");
 
-const currentTime = document.getElementById("current-time");
 
-const duration = document.getElementById("duration");
+const currentTime =
+document.getElementById("current-time");
+
+
+const duration =
+document.getElementById("duration");
 
 
 
@@ -148,38 +177,38 @@ const songLength = 210;
 
 
 
-if(progressBar){
+if(progress){
+
+
+progress.max = songLength;
 
 
 
-progressBar.max = songLength;
-
-
-
-duration.textContent = formatTime(songLength);
-
+duration.textContent =
+formatTime(songLength);
 
 
 
 
-progressBar.addEventListener("input", ()=>{
+progress.addEventListener("input",()=>{
 
 
-let current = Number(progressBar.value);
+const value =
+Number(progress.value);
 
 
 
 currentTime.textContent =
-formatTime(current);
+formatTime(value);
 
 
 
 const percent =
-(current / songLength) * 100;
+(value / songLength) * 100;
 
 
 
-progressBar.style.background =
+progress.style.background =
 
 `linear-gradient(
 to right,
@@ -199,6 +228,8 @@ white ${percent}%,
 
 
 
+
+
 function formatTime(seconds){
 
 
@@ -207,14 +238,15 @@ Math.floor(seconds / 60);
 
 
 
-const remaining =
+const secs =
 seconds % 60;
 
 
 
-return `${minutes}:${remaining
+return `${minutes}:${secs
 .toString()
 .padStart(2,"0")}`;
+
 
 }
 
@@ -228,7 +260,7 @@ return `${minutes}:${remaining
 // SPLASH SCREEN
 
 
-window.addEventListener("load", ()=>{
+window.addEventListener("load",()=>{
 
 
 const splash =
@@ -242,12 +274,12 @@ if(splash){
 setTimeout(()=>{
 
 
-splash.style.opacity="0";
-
-
-
-splash.style.transition=
+splash.style.transition =
 "opacity 1.2s ease";
+
+
+
+splash.style.opacity="0";
 
 
 
@@ -266,6 +298,5 @@ splash.remove();
 
 
 }
-
 
 });
