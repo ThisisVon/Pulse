@@ -1,10 +1,5 @@
 const LASTFM_API_KEY = "8a9d1b7046f57b17a8fd122bb46f714f";
-const LASTFM_URL = "https://ws.audioscrobbler.com/2.0/";
 
-
-
-
-// PAGE SWITCHING
 
 const tabs = document.querySelectorAll("nav button");
 
@@ -16,6 +11,10 @@ const pages = [
 ];
 
 
+
+
+// PAGE SWITCHING
+
 tabs.forEach((tab,index)=>{
 
     tab.addEventListener("click",()=>{
@@ -26,6 +25,7 @@ tabs.forEach((tab,index)=>{
             button.classList.remove("active");
 
         });
+
 
 
         tab.classList.add("active");
@@ -44,6 +44,7 @@ tabs.forEach((tab,index)=>{
         document.getElementById(pages[index]);
 
 
+
         if(selected){
 
             selected.classList.add("active-page");
@@ -52,6 +53,7 @@ tabs.forEach((tab,index)=>{
 
 
     });
+
 
 });
 
@@ -62,8 +64,7 @@ tabs.forEach((tab,index)=>{
 
 
 
-// PLAY / PAUSE MORPH
-
+// PLAY / PAUSE
 
 const playButton =
 document.querySelector(".play-button");
@@ -72,25 +73,77 @@ document.querySelector(".play-button");
 let playing = false;
 
 
+
 if(playButton){
 
 
-    playButton.addEventListener("click",()=>{
+playButton.addEventListener("click",()=>{
 
 
-        playing = !playing;
+    playing = !playing;
 
 
-        playButton.classList.toggle(
-            "playing",
-            playing
-        );
+
+    playButton.classList.toggle(
+        "playing",
+        playing
+    );
 
 
-    });
+});
 
 
 }
+
+
+
+
+
+
+
+
+
+// SKIP BUTTONS
+
+const backButton =
+document.querySelector(".back");
+
+
+const forwardButton =
+document.querySelector(".forward");
+
+
+
+if(backButton){
+
+
+backButton.addEventListener("click",()=>{
+
+
+console.log("Previous song");
+
+
+});
+
+
+}
+
+
+
+if(forwardButton){
+
+
+forwardButton.addEventListener("click",()=>{
+
+
+console.log("Next song");
+
+
+});
+
+
+}
+
 
 
 
@@ -122,46 +175,50 @@ const songLength = 210;
 if(progress){
 
 
-    progress.max = songLength;
-
-
-    duration.textContent =
-    formatTime(songLength);
+progress.max=songLength;
 
 
 
-    progress.addEventListener("input",()=>{
-
-
-        const value =
-        Number(progress.value);
+duration.textContent =
+formatTime(songLength);
 
 
 
-        currentTime.textContent =
-        formatTime(value);
+
+progress.addEventListener("input",()=>{
+
+
+const value =
+Number(progress.value);
 
 
 
-        const percent =
-        (value / songLength) * 100;
+currentTime.textContent =
+formatTime(value);
 
 
 
-        progress.style.background =
-
-        `linear-gradient(
-        to right,
-        white ${percent}%,
-        #333 ${percent}%,
-        #333 100%
-        )`;
+const percent =
+(value/songLength)*100;
 
 
-    });
+
+progress.style.background =
+
+`linear-gradient(
+to right,
+white ${percent}%,
+#333 ${percent}%,
+#333 100%
+)`;
+
+
+});
 
 
 }
+
+
 
 
 
@@ -170,17 +227,66 @@ if(progress){
 function formatTime(seconds){
 
 
-    const minutes =
-    Math.floor(seconds / 60);
+const minutes =
+Math.floor(seconds/60);
 
 
-    const secs =
-    seconds % 60;
+
+const secs =
+seconds % 60;
 
 
-    return `${minutes}:${secs
-    .toString()
-    .padStart(2,"0")}`;
+
+return `${minutes}:${secs
+.toString()
+.padStart(2,"0")}`;
+
+
+}
+
+
+
+
+
+
+
+
+
+// LAST.FM CONNECTION
+
+
+async function lastFM(method,params={}){
+
+
+const url =
+new URL(
+"https://ws.audioscrobbler.com/2.0/"
+);
+
+
+
+url.search =
+new URLSearchParams({
+
+method,
+
+api_key:LASTFM_API_KEY,
+
+format:"json",
+
+...params
+
+});
+
+
+
+const response =
+await fetch(url);
+
+
+
+return await response.json();
+
 
 }
 
@@ -191,56 +297,159 @@ function formatTime(seconds){
 
 
 
-// LAST.FM TRENDING MUSIC
+// LOAD EXPLORE
 
 
-async function getTrendingMusic(){
+async function loadExplore(){
 
 
-    try{
-
-
-        const url =
-        `${LASTFM_URL}?method=chart.gettoptracks&api_key=${LASTFM_API_KEY}&format=json`;
+const explore =
+document.querySelector("#explore");
 
 
 
-        const response =
-        await fetch(url);
+if(!explore)
+return;
 
 
 
-        const data =
-        await response.json();
+const data =
+await lastFM(
+"chart.getTopTracks",
+{
+limit:10
+}
+);
 
 
 
-        console.log(
-            "Trending Music:",
-            data.tracks.track
-        );
+const tracks =
+data.tracks?.track;
 
 
-    }
+
+if(!tracks)
+return;
 
 
-    catch(error){
+
+const container =
+document.createElement("div");
 
 
-        console.error(
-            "Last.fm Error:",
-            error
-        );
+
+container.className =
+"music-results";
 
 
-    }
+
+tracks.forEach(track=>{
+
+
+const card =
+document.createElement("div");
+
+
+
+card.className =
+"music-card";
+
+
+
+card.innerHTML=`
+
+<h3>${track.name}</h3>
+
+<p>${track.artist.name}</p>
+
+`;
+
+
+
+card.onclick=()=>{
+
+
+updatePlayer(
+track.name,
+track.artist.name
+);
+
+
+};
+
+
+
+container.appendChild(card);
+
+
+
+});
+
+
+
+explore.appendChild(container);
 
 
 }
 
 
 
-getTrendingMusic();
+
+
+
+
+
+
+// SEARCH
+
+
+const searchInput =
+document.querySelector(".search-box input");
+
+
+
+if(searchInput){
+
+
+searchInput.addEventListener(
+"input",
+async()=>{
+
+
+const query =
+searchInput.value.trim();
+
+
+
+if(query.length < 2)
+return;
+
+
+
+const data =
+await lastFM(
+"track.search",
+{
+track:query,
+limit:10
+}
+);
+
+
+
+const results =
+data.results?.trackmatches?.track;
+
+
+
+showSearchResults(results);
+
+
+
+});
+
+
+}
 
 
 
@@ -249,45 +458,171 @@ getTrendingMusic();
 
 
 
-// SPLASH FADE
+function showSearchResults(tracks){
+
+
+if(!tracks)
+return;
+
+
+
+const search =
+document.querySelector("#search");
+
+
+
+let container =
+document.querySelector(".search-results");
+
+
+
+if(!container){
+
+
+container =
+document.createElement("div");
+
+
+container.className =
+"search-results";
+
+
+search.appendChild(container);
+
+
+}
+
+
+
+container.innerHTML="";
+
+
+
+tracks.forEach(track=>{
+
+
+const card =
+document.createElement("div");
+
+
+
+card.className =
+"music-card";
+
+
+
+card.innerHTML=`
+
+<h3>${track.name}</h3>
+
+<p>${track.artist}</p>
+
+`;
+
+
+
+card.onclick=()=>{
+
+
+updatePlayer(
+track.name,
+track.artist
+);
+
+
+};
+
+
+
+container.appendChild(card);
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// UPDATE PLAYER
+
+
+function updatePlayer(song,artist){
+
+
+const title =
+document.querySelector(".player h2");
+
+const artistName =
+document.querySelector(".player p");
+
+
+
+if(title)
+title.textContent=song;
+
+
+
+if(artistName)
+artistName.textContent=artist;
+
+
+
+}
+
+
+
+
+
+
+
+
+// SPLASH
 
 
 window.addEventListener("load",()=>{
 
 
-    const splash =
-    document.querySelector(".splash");
+const splash =
+document.querySelector(".splash");
 
 
 
-    if(splash){
+if(splash){
 
 
-        setTimeout(()=>{
+setTimeout(()=>{
 
 
-            splash.style.transition =
-            "opacity 1.2s ease";
+splash.style.transition =
+"opacity 1.2s ease";
 
 
-            splash.style.opacity="0";
-
-
-
-            setTimeout(()=>{
-
-
-                splash.remove();
-
-
-            },1200);
+splash.style.opacity="0";
 
 
 
-        },2500);
+setTimeout(()=>{
 
 
-    }
+splash.remove();
+
+
+},1200);
+
+
+
+},2500);
+
+
+}
+
 
 
 });
@@ -296,26 +631,4 @@ window.addEventListener("load",()=>{
 
 
 
-
-
-
-// HAPTIC FEEDBACK
-
-
-document.querySelectorAll("button").forEach(button=>{
-
-
-    button.addEventListener("click",()=>{
-
-
-        if(navigator.vibrate){
-
-            navigator.vibrate(10);
-
-        }
-
-
-    });
-
-
-});
+loadExplore();
