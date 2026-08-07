@@ -153,11 +153,15 @@ async function lastFM(method,params={}){
 
 function getImage(track){
 
-    return (
-        track.image?.[3]?.["#text"] ||
-        track.album?.image?.[3]?.["#text"] ||
-        ""
-    );
+    let images = track.image || [];
+
+    let image = images[images.length - 1]?.["#text"];
+
+    if(!image){
+        return "https://lastfm.freetls.fastly.net/i/u/300x300/4128a6eb29f94943c9d206c08e625904.jpg";
+    }
+
+    return image;
 
 }
 
