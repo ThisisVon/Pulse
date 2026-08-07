@@ -26,6 +26,7 @@ sans-serif;
 
 
 
+
 .home-background{
 
 position:absolute;
@@ -56,7 +57,6 @@ z-index:-1;
 
 
 /* SPLASH */
-
 
 .splash{
 
@@ -95,18 +95,29 @@ animation:pulseLogo 2.5s infinite ease-in-out;
 @keyframes pulseLogo{
 
 0%{
+
 opacity:.45;
+
 transform:scale(.95);
+
 }
+
 
 50%{
+
 opacity:1;
+
 transform:scale(1.06);
+
 }
 
+
 100%{
+
 opacity:.45;
+
 transform:scale(.95);
+
 }
 
 }
@@ -190,6 +201,8 @@ pointer-events:auto;
 
 
 
+
+
 /* PLAYER */
 
 
@@ -208,6 +221,7 @@ align-items:center;
 padding-bottom:80px;
 
 }
+
 
 
 
@@ -236,6 +250,7 @@ box-shadow:0 30px 80px black;
 
 
 
+
 h2{
 
 margin-top:25px;
@@ -243,6 +258,7 @@ margin-top:25px;
 margin-bottom:5px;
 
 }
+
 
 
 p{
@@ -283,6 +299,7 @@ margin-top:15px;
 
 
 
+
 /* PROGRESS */
 
 
@@ -314,8 +331,6 @@ cursor:pointer;
 
 
 
-
-
 .progress-bar::-webkit-slider-thumb{
 
 appearance:none;
@@ -343,8 +358,6 @@ border-radius .25s ease;
 
 
 
-
-
 .progress-bar:active::-webkit-slider-thumb{
 
 width:38px;
@@ -356,6 +369,7 @@ border-radius:20px;
 background:white;
 
 }
+
 
 
 
@@ -397,6 +411,19 @@ opacity:.75;
 
 
 
+/* REMOVE PRESS ANIMATION FROM PLAY */
+
+.play-button:active{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+
+
+
 
 
 
@@ -423,7 +450,7 @@ margin-top:25px;
 
 
 
-/* PLAY */
+/* PLAY BUTTON */
 
 
 .play-button{
@@ -453,6 +480,8 @@ justify-content:center;
 
 
 
+
+
 .play-container{
 
 width:38px;
@@ -462,6 +491,8 @@ height:38px;
 position:relative;
 
 }
+
+
 
 
 
@@ -478,6 +509,7 @@ height:100%;
 
 fill:white;
 
+
 transition:
 
 opacity .3s ease,
@@ -485,6 +517,8 @@ opacity .3s ease,
 transform .35s ease;
 
 }
+
+
 
 
 
@@ -523,7 +557,7 @@ transform:scale(1);
 
 
 
-/* SKIP */
+/* SKIP BUTTONS */
 
 
 .skip svg{
@@ -541,6 +575,7 @@ stroke-linecap:round;
 stroke-linejoin:round;
 
 }
+
 
 
 
@@ -570,7 +605,6 @@ rgba(255,255,255,.08);
 backdrop-filter:blur(25px);
 
 }
-
 
 
 
@@ -645,6 +679,7 @@ width:100%;
 
 
 
+
 /* NAV */
 
 
@@ -683,6 +718,8 @@ backdrop-filter:blur(35px);
 
 
 
+
+
 nav button{
 
 display:flex;
@@ -699,11 +736,14 @@ opacity:.45;
 
 
 
+
+
 nav button.active{
 
 opacity:1;
 
 }
+
 
 
 
