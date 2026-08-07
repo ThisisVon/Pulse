@@ -7,9 +7,7 @@ html,
 body{
 
 margin:0;
-
 width:100%;
-
 height:100%;
 
 overflow:hidden;
@@ -23,32 +21,6 @@ font-family:
 BlinkMacSystemFont,
 "SF Pro Display",
 sans-serif;
-
-}
-
-
-
-body::before{
-
-content:"";
-
-position:absolute;
-
-width:500px;
-
-height:500px;
-
-background:#333;
-
-border-radius:50%;
-
-filter:blur(150px);
-
-top:-250px;
-
-left:-150px;
-
-opacity:.45;
 
 }
 
@@ -70,14 +42,7 @@ align-items:center;
 
 justify-content:center;
 
-z-index:999;
-
-
-animation:
-
-splashFade 1s forwards;
-
-animation-delay:2.5s;
+z-index:9999;
 
 }
 
@@ -90,53 +55,42 @@ font-weight:700;
 
 letter-spacing:-3px;
 
-
-animation:
-
-pulseLogo 2s infinite ease-in-out;
+animation:pulseLogo 2s ease-in-out infinite;
 
 }
 
+
+
+.splash.hide{
+
+animation:splashFade .8s forwards;
+
+}
 
 
 
 @keyframes pulseLogo{
 
-
 0%{
-
-opacity:.4;
-
+opacity:.45;
 transform:scale(.95);
-
 }
-
 
 50%{
-
 opacity:1;
-
 transform:scale(1.05);
-
 }
-
 
 100%{
-
-opacity:.4;
-
+opacity:.45;
 transform:scale(.95);
-
 }
 
-
 }
-
 
 
 
 @keyframes splashFade{
-
 
 to{
 
@@ -145,7 +99,6 @@ opacity:0;
 visibility:hidden;
 
 }
-
 
 }
 
@@ -158,15 +111,13 @@ visibility:hidden;
 
 .app{
 
-height:100dvh;
-
 width:100%;
+
+height:100dvh;
 
 position:relative;
 
 overflow:hidden;
-
-padding:25px;
 
 }
 
@@ -174,12 +125,20 @@ padding:25px;
 
 
 
-.page{
+/* PAGES */
 
+
+.page{
 
 position:absolute;
 
-inset:0;
+top:0;
+
+left:0;
+
+right:0;
+
+bottom:0;
 
 
 padding:35px;
@@ -194,8 +153,7 @@ align-items:center;
 
 opacity:0;
 
-transform:translateY(-25px);
-
+transform:translateY(-20px);
 
 pointer-events:none;
 
@@ -206,9 +164,7 @@ opacity .35s ease,
 
 transform .35s ease;
 
-
 }
-
 
 
 
@@ -221,6 +177,8 @@ transform:translateY(0);
 pointer-events:auto;
 
 }
+
+
 
 
 
@@ -241,113 +199,29 @@ justify-content:center;
 
 align-items:center;
 
-padding-bottom:40px;
+padding-bottom:80px;
 
 }
-
 
 
 
 .album{
 
-
 width:270px;
 
 height:270px;
 
-
 border-radius:45px;
-
 
 background:
 
-linear-gradient(
-
-135deg,
-
-#222,
-
-#555
-
-);
-
-
+linear-gradient(135deg,#222,#555);
 
 box-shadow:
 
 0 30px 80px black;
 
-
 overflow:hidden;
-
-position:relative;
-
-
-}
-
-
-
-
-
-.album::after{
-
-
-content:"";
-
-
-position:absolute;
-
-
-inset:0;
-
-
-background:
-
-linear-gradient(
-
-120deg,
-
-transparent,
-
-rgba(255,255,255,.25),
-
-transparent
-
-);
-
-
-transform:translateX(-100%);
-
-
-animation:shine 5s infinite;
-
-
-}
-
-
-
-
-
-@keyframes shine{
-
-
-to{
-
-transform:translateX(100%);
-
-}
-
-}
-
-
-
-
-
-h1{
-
-margin-top:20px;
-
-font-size:34px;
 
 }
 
@@ -355,9 +229,7 @@ font-size:34px;
 
 h2{
 
-margin-top:25px;
-
-margin-bottom:5px;
+margin:25px 0 5px;
 
 }
 
@@ -372,22 +244,19 @@ color:#999;
 
 
 
-.progress{
 
+
+.progress{
 
 width:85%;
 
 height:6px;
 
-
 background:#333;
-
 
 border-radius:20px;
 
-
 margin:25px;
-
 
 }
 
@@ -395,18 +264,13 @@ margin:25px;
 
 .progress div{
 
-
 width:45%;
-
 
 height:100%;
 
-
 background:white;
 
-
 border-radius:20px;
-
 
 }
 
@@ -414,7 +278,7 @@ border-radius:20px;
 
 
 
-/* CONTROLS */
+/* BUTTONS */
 
 
 .controls{
@@ -429,30 +293,19 @@ gap:40px;
 
 
 
-
-button{
-
-
-border:none;
-
-background:none;
-
-color:white;
-
-}
-
-
-
 .play-button{
-
 
 width:80px;
 
 height:80px;
 
-
 border-radius:50%;
 
+background:
+
+rgba(255,255,255,.15);
+
+backdrop-filter:blur(25px);
 
 display:flex;
 
@@ -460,30 +313,17 @@ align-items:center;
 
 justify-content:center;
 
-
-
-background:
-
-rgba(255,255,255,.15);
-
-
-backdrop-filter:blur(25px);
-
-
 }
 
 
 
 .play-button svg{
 
-
 width:38px;
 
 height:38px;
 
-
 fill:white;
-
 
 }
 
@@ -498,8 +338,6 @@ height:34px;
 fill:white;
 
 }
-
-
 
 
 
@@ -518,32 +356,23 @@ display:none;
 
 .music-card{
 
-
 width:90%;
-
 
 padding:20px;
 
-
 margin:15px;
 
-
 border-radius:30px;
-
-
 
 background:
 
 rgba(255,255,255,.08);
 
-
 backdrop-filter:blur(25px);
-
 
 border:
 
 1px solid rgba(255,255,255,.15);
-
 
 }
 
@@ -556,58 +385,29 @@ border:
 
 .search-box{
 
-
 width:90%;
-
 
 height:60px;
 
-
 border-radius:30px;
-
 
 background:
 
 rgba(255,255,255,.1);
 
-
-
 display:flex;
-
 
 align-items:center;
 
-
 padding:0 20px;
 
-
 gap:15px;
-
-
-}
-
-
-
-.search-box svg{
-
-
-width:25px;
-
-height:25px;
-
-fill:none;
-
-stroke:white;
-
-stroke-width:2;
-
 
 }
 
 
 
 input{
-
 
 background:none;
 
@@ -621,45 +421,36 @@ font-size:16px;
 
 width:100%;
 
-
 }
 
 
 
 
-/* NAVIGATION */
+
+/* NAV */
 
 
 nav{
 
-
 position:absolute;
-
 
 left:20px;
 
 right:20px;
 
-
-bottom:25px;
-
+bottom:20px;
 
 height:75px;
 
 
-
 display:flex;
 
+align-items:center;
 
 justify-content:space-around;
 
 
-align-items:center;
-
-
-
 border-radius:35px;
-
 
 
 background:
@@ -667,22 +458,18 @@ background:
 rgba(255,255,255,.1);
 
 
-
 backdrop-filter:blur(35px);
-
 
 
 border:
 
 1px solid rgba(255,255,255,.18);
 
-
 }
 
 
 
 nav button{
-
 
 display:flex;
 
@@ -692,9 +479,7 @@ align-items:center;
 
 gap:5px;
 
-
 opacity:.45;
-
 
 }
 
@@ -702,35 +487,25 @@ opacity:.45;
 
 nav button.active{
 
-
 opacity:1;
 
-
 }
-
-
 
 
 
 nav svg{
 
-
 width:27px;
 
 height:27px;
 
-
 fill:white;
-
 
 }
 
 
-
 nav span{
 
-
 font-size:11px;
-
 
 }
