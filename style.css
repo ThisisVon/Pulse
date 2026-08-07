@@ -7,9 +7,7 @@ html,
 body{
 
 margin:0;
-
 width:100%;
-
 height:100%;
 
 overflow:hidden;
@@ -28,9 +26,7 @@ sans-serif;
 
 
 
-
-
-/* HOME BLURRED ALBUM BACKGROUND */
+/* BLURRED ALBUM BACKGROUND */
 
 .home-background{
 
@@ -39,17 +35,14 @@ position:absolute;
 inset:-80px;
 
 background:
-
 linear-gradient(
 rgba(0,0,0,.65),
 rgba(0,0,0,.85)
 ),
-
 url("assets/images/album.jpg");
 
 
 background-size:cover;
-
 background-position:center;
 
 filter:blur(45px);
@@ -106,27 +99,18 @@ animation:pulseLogo 2.5s infinite ease-in-out;
 @keyframes pulseLogo{
 
 0%{
-
 opacity:.45;
-
 transform:scale(.95);
-
 }
 
 50%{
-
 opacity:1;
-
 transform:scale(1.06);
-
 }
 
 100%{
-
 opacity:.45;
-
 transform:scale(.95);
-
 }
 
 }
@@ -157,6 +141,8 @@ visibility:hidden;
 
 
 
+
+
 /* APP */
 
 
@@ -171,6 +157,7 @@ position:relative;
 overflow:hidden;
 
 }
+
 
 
 
@@ -229,6 +216,7 @@ pointer-events:auto;
 
 
 
+
 /* PLAYER */
 
 
@@ -240,9 +228,9 @@ display:flex;
 
 flex-direction:column;
 
-align-items:center;
-
 justify-content:center;
+
+align-items:center;
 
 padding-bottom:80px;
 
@@ -258,16 +246,13 @@ height:270px;
 
 border-radius:45px;
 
+
 background:
 
 linear-gradient(
-
 135deg,
-
 #222,
-
 #555
-
 );
 
 
@@ -276,6 +261,8 @@ box-shadow:
 0 30px 80px black;
 
 }
+
+
 
 
 
@@ -300,7 +287,9 @@ color:#999;
 
 
 
+
 /* TIME */
+
 
 .time-row{
 
@@ -317,6 +306,7 @@ color:#aaa;
 margin-top:15px;
 
 }
+
 
 
 
@@ -346,6 +336,10 @@ border-radius:20px;
 
 background:#333;
 
+outline:none;
+
+cursor:pointer;
+
 }
 
 
@@ -354,15 +348,45 @@ background:#333;
 
 appearance:none;
 
-width:16px;
+width:10px;
 
-height:16px;
+height:6px;
 
-border-radius:50%;
+border-radius:20px;
 
 background:white;
 
+opacity:.7;
+
+
+transition:
+
+width .25s ease,
+
+height .25s ease,
+
+opacity .25s ease,
+
+transform .25s ease;
+
 }
+
+
+
+.progress-bar:active::-webkit-slider-thumb{
+
+width:34px;
+
+height:12px;
+
+border-radius:20px;
+
+opacity:1;
+
+transform:scale(1.05);
+
+}
+
 
 
 
@@ -378,7 +402,7 @@ display:flex;
 
 align-items:center;
 
-gap:25px;
+gap:35px;
 
 margin-top:25px;
 
@@ -409,7 +433,7 @@ transform .15s cubic-bezier(.34,1.56,.64,1);
 
 button:active{
 
-transform:scale(.88);
+transform:scale(.9);
 
 }
 
@@ -441,13 +465,14 @@ backdrop-filter:blur(25px);
 
 display:flex;
 
-align-items:center;
-
 justify-content:center;
+
+align-items:center;
 
 overflow:hidden;
 
 }
+
 
 
 
@@ -482,7 +507,7 @@ transition:
 
 opacity .3s ease,
 
-transform .35s cubic-bezier(.22,1,.36,1);
+transform .35s ease;
 
 }
 
@@ -522,62 +547,19 @@ transform:scale(1);
 
 
 
-/* SKIP BUTTONS */
-
-
-.skip{
-
-width:58px;
-
-height:58px;
-
-border-radius:50%;
-
-background:
-
-rgba(255,255,255,.12);
-
-
-backdrop-filter:blur(25px);
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
-
-
-
-.skip-glass{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
+/* SKIP ICONS */
 
 
 .skip svg{
 
-width:28px;
+width:34px;
 
-height:28px;
-
+height:34px;
 
 fill:white;
 
-
 stroke:white;
 
-stroke-width:2;
-
 stroke-linecap:round;
 
 stroke-linejoin:round;
@@ -585,22 +567,6 @@ stroke-linejoin:round;
 }
 
 
-
-
-
-
-
-
-/* ICON ROUNDING */
-
-
-svg{
-
-stroke-linecap:round;
-
-stroke-linejoin:round;
-
-}
 
 
 
@@ -683,6 +649,10 @@ stroke:white;
 stroke-width:2;
 
 }
+
+
+
+
 
 
 
@@ -786,6 +756,10 @@ fill:none;
 stroke:white;
 
 stroke-width:2.3;
+
+stroke-linecap:round;
+
+stroke-linejoin:round;
 
 }
 
