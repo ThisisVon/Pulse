@@ -14,16 +14,14 @@ const pages = [
 
 tabs.forEach((tab, index)=>{
 
-
     tab.addEventListener("click", ()=>{
 
 
-        tabs.forEach(button=>{
+        tabs.forEach(btn=>{
 
-            button.classList.remove("active");
+            btn.classList.remove("active");
 
         });
-
 
 
         tab.classList.add("active");
@@ -59,7 +57,45 @@ tabs.forEach((tab, index)=>{
 
 
 
-// PLAY / PAUSE MORPH
+// BUTTON PRESS ANIMATION FOR MOBILE
+
+document.querySelectorAll("button").forEach(button=>{
+
+
+    button.addEventListener("touchstart", ()=>{
+
+        button.style.transform = "scale(.88)";
+
+    });
+
+
+
+    button.addEventListener("touchend", ()=>{
+
+        button.style.transform = "scale(1)";
+
+    });
+
+
+
+    button.addEventListener("touchcancel", ()=>{
+
+        button.style.transform = "scale(1)";
+
+    });
+
+
+
+});
+
+
+
+
+
+
+
+
+// PLAY / PAUSE
 
 
 const playButton = document.querySelector(".play-button");
@@ -97,7 +133,6 @@ playing
 
 
 
-
 // PROGRESS BAR
 
 
@@ -116,6 +151,7 @@ const songLength = 210;
 if(progressBar){
 
 
+
 progressBar.max = songLength;
 
 
@@ -124,22 +160,27 @@ duration.textContent = formatTime(songLength);
 
 
 
+
+
 progressBar.addEventListener("input", ()=>{
 
 
-const value = Number(progressBar.value);
+let current = Number(progressBar.value);
 
 
 
-currentTime.textContent = formatTime(value);
+currentTime.textContent =
+formatTime(current);
 
 
 
-const percent = (value / songLength) * 100;
+const percent =
+(current / songLength) * 100;
 
 
 
-progressBar.style.background = 
+progressBar.style.background =
+
 `linear-gradient(
 to right,
 white ${percent}%,
@@ -158,23 +199,22 @@ white ${percent}%,
 
 
 
-
-
-
 function formatTime(seconds){
 
 
-const minutes = Math.floor(seconds / 60);
-
-
-const secs = seconds % 60;
+const minutes =
+Math.floor(seconds / 60);
 
 
 
-return `${minutes}:${secs
+const remaining =
+seconds % 60;
+
+
+
+return `${minutes}:${remaining
 .toString()
 .padStart(2,"0")}`;
-
 
 }
 
@@ -184,13 +224,15 @@ return `${minutes}:${secs
 
 
 
-// SPLASH
+
+// SPLASH SCREEN
 
 
 window.addEventListener("load", ()=>{
 
 
-const splash = document.querySelector(".splash");
+const splash =
+document.querySelector(".splash");
 
 
 
@@ -200,7 +242,12 @@ if(splash){
 setTimeout(()=>{
 
 
-splash.classList.add("hide");
+splash.style.opacity="0";
+
+
+
+splash.style.transition=
+"opacity 1.2s ease";
 
 
 
@@ -215,6 +262,7 @@ splash.remove();
 
 
 },2500);
+
 
 
 }
