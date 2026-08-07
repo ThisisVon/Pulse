@@ -15,7 +15,7 @@ const pages = [
 tabs.forEach((tab,index)=>{
 
 
-    tab.addEventListener("click", ()=>{
+    tab.addEventListener("click",()=>{
 
 
         tabs.forEach(button=>{
@@ -23,6 +23,7 @@ tabs.forEach((tab,index)=>{
             button.classList.remove("active");
 
         });
+
 
 
         tab.classList.add("active");
@@ -77,7 +78,7 @@ let playing = false;
 if(playButton){
 
 
-playButton.addEventListener("click", ()=>{
+playButton.addEventListener("click",()=>{
 
 
 playing = !playing;
@@ -94,61 +95,7 @@ playing
 });
 
 
-
 }
-
-
-
-
-
-
-
-
-// BUTTON PRESS FEEDBACK
-
-document.querySelectorAll("button").forEach(button=>{
-
-
-button.addEventListener("touchstart",()=>{
-
-
-if(!button.classList.contains("play-button")){
-
-button.style.transform="scale(.88)";
-
-}
-
-
-
-});
-
-
-
-
-
-button.addEventListener("touchend",()=>{
-
-
-button.style.transform="scale(1)";
-
-
-});
-
-
-
-
-
-button.addEventListener("touchcancel",()=>{
-
-
-button.style.transform="scale(1)";
-
-
-});
-
-
-
-});
 
 
 
@@ -218,9 +165,7 @@ white ${percent}%,
 )`;
 
 
-
 });
-
 
 
 }
@@ -257,7 +202,7 @@ return `${minutes}:${secs
 
 
 
-// SPLASH SCREEN
+// SPLASH FADE
 
 
 window.addEventListener("load",()=>{
