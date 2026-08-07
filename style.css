@@ -30,7 +30,7 @@ sans-serif;
 
 
 
-/* HOME ALBUM BACKGROUND */
+/* HOME BLURRED ALBUM BACKGROUND */
 
 .home-background{
 
@@ -41,19 +41,16 @@ inset:-80px;
 background:
 
 linear-gradient(
-
 rgba(0,0,0,.65),
-
 rgba(0,0,0,.85)
-
 ),
 
 url("assets/images/album.jpg");
 
+
 background-size:cover;
 
 background-position:center;
-
 
 filter:blur(45px);
 
@@ -61,10 +58,10 @@ transform:scale(1.15);
 
 opacity:.8;
 
-
 z-index:-1;
 
 }
+
 
 
 
@@ -180,7 +177,6 @@ overflow:hidden;
 
 
 
-
 /* PAGES */
 
 
@@ -233,7 +229,6 @@ pointer-events:auto;
 
 
 
-
 /* PLAYER */
 
 
@@ -263,7 +258,6 @@ height:270px;
 
 border-radius:45px;
 
-
 background:
 
 linear-gradient(
@@ -282,9 +276,6 @@ box-shadow:
 0 30px 80px black;
 
 }
-
-
-
 
 
 
@@ -311,7 +302,6 @@ color:#999;
 
 /* TIME */
 
-
 .time-row{
 
 width:85%;
@@ -333,8 +323,7 @@ margin-top:15px;
 
 
 
-
-/* DRAGGABLE PROGRESS */
+/* PROGRESS */
 
 
 .progress-container{
@@ -353,31 +342,11 @@ height:6px;
 
 appearance:none;
 
-background:
-
-linear-gradient(
-
-to right,
-
-white 0%,
-
-white 0%,
-
-#333 0%,
-
-#333 100%
-
-);
-
-
 border-radius:20px;
 
-outline:none;
-
-cursor:pointer;
+background:#333;
 
 }
-
 
 
 
@@ -391,16 +360,9 @@ height:16px;
 
 border-radius:50%;
 
-
 background:white;
 
-
-box-shadow:
-
-0 0 15px rgba(255,255,255,.5);
-
 }
-
 
 
 
@@ -416,11 +378,13 @@ display:flex;
 
 align-items:center;
 
-gap:40px;
+gap:25px;
 
 margin-top:25px;
 
 }
+
+
 
 
 
@@ -434,11 +398,28 @@ color:white;
 
 padding:0;
 
+
+transition:
+
+transform .15s cubic-bezier(.34,1.56,.64,1);
+
+}
+
+
+
+button:active{
+
+transform:scale(.88);
+
 }
 
 
 
 
+
+
+
+/* PLAY BUTTON */
 
 
 .play-button{
@@ -470,6 +451,7 @@ overflow:hidden;
 
 
 
+
 .play-container{
 
 width:38px;
@@ -492,7 +474,6 @@ inset:0;
 width:100%;
 
 height:100%;
-
 
 fill:white;
 
@@ -541,22 +522,61 @@ transform:scale(1);
 
 
 
+/* SKIP BUTTONS */
 
-/* SKIP ICONS */
+
+.skip{
+
+width:58px;
+
+height:58px;
+
+border-radius:50%;
+
+background:
+
+rgba(255,255,255,.12);
+
+
+backdrop-filter:blur(25px);
+
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+
+
+
+.skip-glass{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
 
 
 .skip svg{
 
-width:38px;
+width:28px;
 
-height:38px;
+height:28px;
 
 
-fill:none;
+fill:white;
+
 
 stroke:white;
 
-stroke-width:2.5;
+stroke-width:2;
 
 stroke-linecap:round;
 
@@ -570,7 +590,8 @@ stroke-linejoin:round;
 
 
 
-/* GENERAL ICONS */
+
+/* ICON ROUNDING */
 
 
 svg{
@@ -580,6 +601,7 @@ stroke-linecap:round;
 stroke-linejoin:round;
 
 }
+
 
 
 
@@ -595,7 +617,6 @@ width:90%;
 padding:20px;
 
 margin:15px;
-
 
 border-radius:30px;
 
@@ -628,7 +649,6 @@ border:
 width:90%;
 
 height:60px;
-
 
 border-radius:30px;
 
