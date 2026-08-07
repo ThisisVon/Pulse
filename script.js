@@ -10,283 +10,138 @@ const pages = [
     "library"
 ];
 
-
-
-
-// PAGE SWITCHING
-
 tabs.forEach((tab,index)=>{
-
     tab.addEventListener("click",()=>{
 
-
         tabs.forEach(button=>{
-
             button.classList.remove("active");
-
         });
-
-
 
         tab.classList.add("active");
 
-
-
         document.querySelectorAll(".page").forEach(page=>{
-
             page.classList.remove("active-page");
-
         });
 
-
-
-        const selected =
-        document.getElementById(pages[index]);
-
-
-
-        if(selected){
-
-            selected.classList.add("active-page");
-
-        }
-
+        document.getElementById(pages[index])
+        ?.classList.add("active-page");
 
     });
-
-
 });
 
 
 
+// PLAY BUTTON
 
-
-
-
-
-// PLAY / PAUSE
-
-const playButton =
-document.querySelector(".play-button");
-
+const playButton = document.querySelector(".play-button");
 
 let playing = false;
 
-
-
-if(playButton){
-
-
-playButton.addEventListener("click",()=>{
-
+playButton?.addEventListener("click",()=>{
 
     playing = !playing;
-
-
 
     playButton.classList.toggle(
         "playing",
         playing
     );
 
-
 });
 
 
-}
 
+// PROGRESS
 
-
-
-
-
-
-
-
-// SKIP BUTTONS
-
-const backButton =
-document.querySelector(".back");
-
-
-const forwardButton =
-document.querySelector(".forward");
-
-
-
-if(backButton){
-
-
-backButton.addEventListener("click",()=>{
-
-
-console.log("Previous song");
-
-
-});
-
-
-}
-
-
-
-if(forwardButton){
-
-
-forwardButton.addEventListener("click",()=>{
-
-
-console.log("Next song");
-
-
-});
-
-
-}
-
-
-
-
-
-
-
-
-
-// PROGRESS BAR
-
-
-const progress =
-document.querySelector(".progress-bar");
-
-
-const currentTime =
-document.getElementById("current-time");
-
-
-const duration =
-document.getElementById("duration");
-
-
+const progress = document.querySelector(".progress-bar");
+const currentTime = document.getElementById("current-time");
+const duration = document.getElementById("duration");
 
 const songLength = 210;
 
+function formatTime(seconds){
+
+    const minutes = Math.floor(seconds/60);
+
+    const secs = seconds % 60;
+
+    return `${minutes}:${secs
+    .toString()
+    .padStart(2,"0")}`;
+
+}
 
 
-if(progress){
+progress?.addEventListener("input",()=>{
 
+    let value = Number(progress.value);
 
-progress.max=songLength;
+    currentTime.textContent =
+    formatTime(value);
 
+    let percent =
+    (value/songLength)*100;
 
-
-duration.textContent =
-formatTime(songLength);
-
-
-
-
-progress.addEventListener("input",()=>{
-
-
-const value =
-Number(progress.value);
-
-
-
-currentTime.textContent =
-formatTime(value);
-
-
-
-const percent =
-(value/songLength)*100;
-
-
-
-progress.style.background =
-
-`linear-gradient(
-to right,
-white ${percent}%,
-#333 ${percent}%,
-#333 100%
-)`;
-
+    progress.style.background =
+    `linear-gradient(
+    to right,
+    white ${percent}%,
+    #333 ${percent}%,
+    #333 100%)`;
 
 });
 
 
-}
+
+// VOLUME
+
+const volume = document.querySelector(".volume-bar");
+
+volume?.addEventListener("input",()=>{
+
+    let percent = volume.value;
+
+    volume.style.background =
+    `linear-gradient(
+    to right,
+    white ${percent}%,
+    #333 ${percent}%,
+    #333 100%)`;
+
+});
 
 
 
 
 
-
-
-function formatTime(seconds){
-
-
-const minutes =
-Math.floor(seconds/60);
-
-
-
-const secs =
-seconds % 60;
-
-
-
-return `${minutes}:${secs
-.toString()
-.padStart(2,"0")}`;
-
-
-}
-
-
-
-
-
-
-
-
-
-// LAST.FM CONNECTION
-
+// LAST FM
 
 async function lastFM(method,params={}){
 
-
-const url =
-new URL(
-"https://ws.audioscrobbler.com/2.0/"
-);
-
+    const url =
+    new URL(
+    "https://ws.audioscrobbler.com/2.0/"
+    );
 
 
-url.search =
-new URLSearchParams({
+    url.search =
+    new URLSearchParams({
 
-method,
+        method,
 
-api_key:LASTFM_API_KEY,
+        api_key:LASTFM_API_KEY,
 
-format:"json",
+        format:"json",
 
-...params
+        ...params
 
-});
-
-
-
-const response =
-await fetch(url);
+    });
 
 
+    const response =
+    await fetch(url);
 
-return await response.json();
 
+    return await response.json();
 
 }
 
@@ -294,52 +149,54 @@ return await response.json();
 
 
 
+// IMAGE FINDER
+
+function getImage(track){
+
+    return (
+        track.image?.[3]?.["#text"] ||
+        track.album?.image?.[3]?.["#text"] ||
+        ""
+    );
+
+}
 
 
 
-// LOAD EXPLORE
+
+
+// EXPLORE
 
 
 async function loadExplore(){
 
+const container =
+document.getElementById(
+"explore-results"
+);
 
-const explore =
-document.querySelector("#explore");
 
-
-
-if(!explore)
-return;
-
+if(!container) return;
 
 
 const data =
 await lastFM(
 "chart.getTopTracks",
 {
-limit:10
+limit:20
 }
 );
-
 
 
 const tracks =
 data.tracks?.track;
 
 
-
-if(!tracks)
-return;
+if(!tracks) return;
 
 
 
-const container =
-document.createElement("div");
-
-
-
-container.className =
-"music-results";
+container.innerHTML="";
 
 
 
@@ -350,17 +207,29 @@ const card =
 document.createElement("div");
 
 
-
 card.className =
-"music-card";
+"music-card explore-card";
 
 
 
-card.innerHTML=`
+let image =
+getImage(track);
+
+
+
+card.innerHTML = `
+
+<img class="card-cover"
+src="${image}">
+
+
+<div>
 
 <h3>${track.name}</h3>
 
 <p>${track.artist.name}</p>
+
+</div>
 
 `;
 
@@ -368,10 +237,10 @@ card.innerHTML=`
 
 card.onclick=()=>{
 
-
 updatePlayer(
 track.name,
-track.artist.name
+track.artist.name,
+image
 );
 
 
@@ -386,15 +255,7 @@ container.appendChild(card);
 });
 
 
-
-explore.appendChild(container);
-
-
 }
-
-
-
-
 
 
 
@@ -404,14 +265,13 @@ explore.appendChild(container);
 
 
 const searchInput =
-document.querySelector(".search-box input");
+document.querySelector(
+"#search-input"
+);
 
 
 
-if(searchInput){
-
-
-searchInput.addEventListener(
+searchInput?.addEventListener(
 "input",
 async()=>{
 
@@ -437,22 +297,12 @@ limit:10
 
 
 
-const results =
-data.results?.trackmatches?.track;
-
-
-
-showSearchResults(results);
-
+showSearchResults(
+data.results?.trackmatches?.track
+);
 
 
 });
-
-
-}
-
-
-
 
 
 
@@ -461,36 +311,15 @@ showSearchResults(results);
 function showSearchResults(tracks){
 
 
-if(!tracks)
+const container =
+document.getElementById(
+"search-results"
+);
+
+
+
+if(!container || !tracks)
 return;
-
-
-
-const search =
-document.querySelector("#search");
-
-
-
-let container =
-document.querySelector(".search-results");
-
-
-
-if(!container){
-
-
-container =
-document.createElement("div");
-
-
-container.className =
-"search-results";
-
-
-search.appendChild(container);
-
-
-}
 
 
 
@@ -505,13 +334,12 @@ const card =
 document.createElement("div");
 
 
-
 card.className =
-"music-card";
+"music-card explore-card";
 
 
 
-card.innerHTML=`
+card.innerHTML = `
 
 <h3>${track.name}</h3>
 
@@ -523,12 +351,11 @@ card.innerHTML=`
 
 card.onclick=()=>{
 
-
 updatePlayer(
 track.name,
-track.artist
+track.artist,
+""
 );
-
 
 };
 
@@ -537,98 +364,54 @@ track.artist
 container.appendChild(card);
 
 
-});
-
-
-}
-
-
-
-
-
-
-
-
-
-// UPDATE PLAYER
-
-
-function updatePlayer(song,artist){
-
-
-const title =
-document.querySelector(".player h2");
-
-const artistName =
-document.querySelector(".player p");
-
-
-
-if(title)
-title.textContent=song;
-
-
-
-if(artistName)
-artistName.textContent=artist;
-
-
-
-}
-
-
-
-
-
-
-
-
-// SPLASH
-
-
-window.addEventListener("load",()=>{
-
-
-const splash =
-document.querySelector(".splash");
-
-
-
-if(splash){
-
-
-setTimeout(()=>{
-
-
-splash.style.transition =
-"opacity 1.2s ease";
-
-
-splash.style.opacity="0";
-
-
-
-setTimeout(()=>{
-
-
-splash.remove();
-
-
-},1200);
-
-
-
-},2500);
-
-
-}
-
-
 
 });
 
 
+}
 
 
+
+
+
+
+// PLAYER UPDATE
+
+
+function updatePlayer(song,artist,image){
+
+
+document.getElementById(
+"song-title"
+).textContent=song;
+
+
+
+document.getElementById(
+"artist-name"
+).textContent=artist;
+
+
+
+if(image){
+
+document.getElementById(
+"album-cover"
+).src=image;
+
+}
+
+
+}
+
+
+
+
+window.addEventListener(
+"load",
+()=>{
 
 loadExplore();
+
+}
+);loadExplore();
