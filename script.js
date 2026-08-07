@@ -245,3 +245,32 @@ splash.remove();
 }
 
 });
+
+
+
+
+
+
+
+
+// HAPTIC FEEDBACK
+
+document.querySelectorAll("button").forEach(button=>{
+
+
+button.addEventListener("click",()=>{
+
+
+// Supported browsers
+
+if(navigator.vibrate){
+
+navigator.vibrate(10);
+
+}
+
+
+});
+
+
+});
