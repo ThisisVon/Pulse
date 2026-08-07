@@ -1,3 +1,11 @@
+const LASTFM_API_KEY = "PASTE_API_KEY_HERE";
+const LASTFM_URL = "https://ws.audioscrobbler.com/2.0/";
+
+
+
+
+// PAGE SWITCHING
+
 const tabs = document.querySelectorAll("nav button");
 
 const pages = [
@@ -8,12 +16,7 @@ const pages = [
 ];
 
 
-
-
-// PAGE SWITCHING
-
 tabs.forEach((tab,index)=>{
-
 
     tab.addEventListener("click",()=>{
 
@@ -23,7 +26,6 @@ tabs.forEach((tab,index)=>{
             button.classList.remove("active");
 
         });
-
 
 
         tab.classList.add("active");
@@ -42,7 +44,6 @@ tabs.forEach((tab,index)=>{
         document.getElementById(pages[index]);
 
 
-
         if(selected){
 
             selected.classList.add("active-page");
@@ -50,9 +51,7 @@ tabs.forEach((tab,index)=>{
         }
 
 
-
     });
-
 
 });
 
@@ -70,29 +69,25 @@ const playButton =
 document.querySelector(".play-button");
 
 
-
 let playing = false;
-
 
 
 if(playButton){
 
 
-playButton.addEventListener("click",()=>{
+    playButton.addEventListener("click",()=>{
 
 
-playing = !playing;
+        playing = !playing;
 
 
-
-playButton.classList.toggle(
-"playing",
-playing
-);
-
+        playButton.classList.toggle(
+            "playing",
+            playing
+        );
 
 
-});
+    });
 
 
 }
@@ -127,49 +122,46 @@ const songLength = 210;
 if(progress){
 
 
-progress.max = songLength;
+    progress.max = songLength;
+
+
+    duration.textContent =
+    formatTime(songLength);
 
 
 
-duration.textContent =
-formatTime(songLength);
+    progress.addEventListener("input",()=>{
+
+
+        const value =
+        Number(progress.value);
 
 
 
-
-progress.addEventListener("input",()=>{
-
-
-const value =
-Number(progress.value);
+        currentTime.textContent =
+        formatTime(value);
 
 
 
-currentTime.textContent =
-formatTime(value);
+        const percent =
+        (value / songLength) * 100;
 
 
 
-const percent =
-(value / songLength) * 100;
+        progress.style.background =
+
+        `linear-gradient(
+        to right,
+        white ${percent}%,
+        #333 ${percent}%,
+        #333 100%
+        )`;
 
 
-
-progress.style.background =
-
-`linear-gradient(
-to right,
-white ${percent}%,
-#333 ${percent}%,
-#333 100%
-)`;
-
-
-});
+    });
 
 
 }
-
 
 
 
@@ -178,22 +170,77 @@ white ${percent}%,
 function formatTime(seconds){
 
 
-const minutes =
-Math.floor(seconds / 60);
+    const minutes =
+    Math.floor(seconds / 60);
+
+
+    const secs =
+    seconds % 60;
+
+
+    return `${minutes}:${secs
+    .toString()
+    .padStart(2,"0")}`;
+
+}
 
 
 
-const secs =
-seconds % 60;
 
 
 
-return `${minutes}:${secs
-.toString()
-.padStart(2,"0")}`;
+
+
+// LAST.FM TRENDING MUSIC
+
+
+async function getTrendingMusic(){
+
+
+    try{
+
+
+        const url =
+        `${LASTFM_URL}?method=chart.gettoptracks&api_key=${LASTFM_API_KEY}&format=json`;
+
+
+
+        const response =
+        await fetch(url);
+
+
+
+        const data =
+        await response.json();
+
+
+
+        console.log(
+            "Trending Music:",
+            data.tracks.track
+        );
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Last.fm Error:",
+            error
+        );
+
+
+    }
 
 
 }
+
+
+
+getTrendingMusic();
 
 
 
@@ -208,41 +255,40 @@ return `${minutes}:${secs
 window.addEventListener("load",()=>{
 
 
-const splash =
-document.querySelector(".splash");
+    const splash =
+    document.querySelector(".splash");
 
 
 
-if(splash){
+    if(splash){
 
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
 
-splash.style.transition =
-"opacity 1.2s ease";
+            splash.style.transition =
+            "opacity 1.2s ease";
 
 
-
-splash.style.opacity="0";
-
-
-
-setTimeout(()=>{
-
-
-splash.remove();
-
-
-},1200);
+            splash.style.opacity="0";
 
 
 
-},2500);
+            setTimeout(()=>{
+
+
+                splash.remove();
+
+
+            },1200);
 
 
 
-}
+        },2500);
+
+
+    }
+
 
 });
 
@@ -255,22 +301,21 @@ splash.remove();
 
 // HAPTIC FEEDBACK
 
+
 document.querySelectorAll("button").forEach(button=>{
 
 
-button.addEventListener("click",()=>{
+    button.addEventListener("click",()=>{
 
 
-// Supported browsers
+        if(navigator.vibrate){
 
-if(navigator.vibrate){
+            navigator.vibrate(10);
 
-navigator.vibrate(10);
-
-}
+        }
 
 
-});
+    });
 
 
 });
