@@ -38,13 +38,12 @@ tabs.forEach((tab, index)=>{
 
 
 
-        const selectedPage = document.getElementById(pages[index]);
+        const selected = document.getElementById(pages[index]);
 
 
+        if(selected){
 
-        if(selectedPage){
-
-            selectedPage.classList.add("active-page");
+            selected.classList.add("active-page");
 
         }
 
@@ -73,19 +72,21 @@ let playing = false;
 if(playButton){
 
 
-    playButton.addEventListener("click", ()=>{
+playButton.addEventListener("click", ()=>{
 
 
-        playing = !playing;
+playing = !playing;
 
 
-        playButton.classList.toggle(
-            "playing",
-            playing
-        );
+
+playButton.classList.toggle(
+"playing",
+playing
+);
 
 
-    });
+
+});
 
 
 }
@@ -104,7 +105,7 @@ const progressBar = document.querySelector(".progress-bar");
 
 const currentTime = document.getElementById("current-time");
 
-const durationText = document.getElementById("duration");
+const duration = document.getElementById("duration");
 
 
 
@@ -115,12 +116,11 @@ const songLength = 210;
 if(progressBar){
 
 
-
-durationText.textContent = formatTime(songLength);
-
-
-
 progressBar.max = songLength;
+
+
+
+duration.textContent = formatTime(songLength);
 
 
 
@@ -139,12 +139,14 @@ const percent = (value / songLength) * 100;
 
 
 
-progressBar.style.background = `linear-gradient(
+progressBar.style.background = 
+`linear-gradient(
 to right,
 white ${percent}%,
 #333 ${percent}%,
 #333 100%
 )`;
+
 
 
 });
@@ -156,16 +158,20 @@ white ${percent}%,
 
 
 
+
+
+
 function formatTime(seconds){
 
 
 const minutes = Math.floor(seconds / 60);
 
 
-const remaining = seconds % 60;
+const secs = seconds % 60;
 
 
-return `${minutes}:${remaining
+
+return `${minutes}:${secs
 .toString()
 .padStart(2,"0")}`;
 
