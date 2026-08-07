@@ -1,4 +1,4 @@
-const LASTFM_API_KEY = "PASTE_API_KEY_HERE";
+const LASTFM_API_KEY = "8a9d1b7046f57b17a8fd122bb46f714f";
 const LASTFM_URL = "https://ws.audioscrobbler.com/2.0/";
 
 
