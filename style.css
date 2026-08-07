@@ -25,54 +25,189 @@ sans-serif;
 
 
 
+/* Splash Screen */
+
+.splash{
+
+position:fixed;
+
+inset:0;
+
+background:#090909;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:999;
+
+
+animation:
+splashFade 1.2s ease forwards;
+
+
+animation-delay:2s;
+
+}
+
+
+
+.pulse-logo{
+
+font-size:55px;
+
+font-weight:700;
+
+letter-spacing:-3px;
+
+
+color:white;
+
+
+animation:
+logoAppear 2s ease;
+
+}
+
+
+
+@keyframes logoAppear{
+
+
+0%{
+
+opacity:0;
+
+transform:scale(.75);
+
+}
+
+
+
+50%{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+
+
+100%{
+
+opacity:1;
+
+transform:scale(1.05);
+
+}
+
+
+}
+
+
+
+@keyframes splashFade{
+
+
+0%{
+
+opacity:1;
+
+}
+
+
+
+100%{
+
+opacity:0;
+
+visibility:hidden;
+
+}
+
+
+}
+
+
+
+
+
+
+/* Background Glow */
+
+
+body::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+width:500px;
+
+height:500px;
+
+
+background:#222;
+
+
+border-radius:50%;
+
+
+filter:blur(140px);
+
+
+
+top:-200px;
+
+left:-200px;
+
+
+opacity:.8;
+
+
+}
+
+
+
+
+
 .app{
 
 height:100vh;
 
 padding:35px;
 
+
 position:relative;
 
+z-index:1;
+
+
 }
 
-
-
-body::before{
-
-content:"";
-
-position:absolute;
-
-width:500px;
-height:500px;
-
-background:#333;
-
-filter:blur(130px);
-
-border-radius:50%;
-
-top:-200px;
-
-left:-200px;
-
-}
 
 
 
 .page{
 
+
 height:100%;
+
 
 display:flex;
 
+
 flex-direction:column;
+
 
 align-items:center;
 
-position:relative;
-
-z-index:1;
 
 }
 
@@ -86,46 +221,71 @@ display:none;
 
 
 
+
+
 header h1{
+
 
 font-size:34px;
 
+
+margin:10px;
+
+
 }
+
+
 
 
 
 
 .player{
 
+
 flex:1;
+
 
 display:flex;
 
+
 justify-content:center;
+
 
 align-items:center;
 
+
 flex-direction:column;
+
 
 }
 
 
 
+
+
 .album{
+
 
 width:260px;
 
+
 height:260px;
 
+
 border-radius:35px;
+
 
 
 background:
 
 linear-gradient(
+
 135deg,
+
 #222,
-#444
+
+#555
+
 );
 
 
@@ -134,15 +294,85 @@ box-shadow:
 
 0 30px 70px black;
 
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
 }
+
+
+
+
+
+.album::after{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:0;
+
+
+background:
+
+linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.25),
+
+transparent
+
+);
+
+
+
+transform:translateX(-100%);
+
+
+animation:
+
+shine 4s infinite;
+
+
+}
+
+
+
+
+@keyframes shine{
+
+
+100%{
+
+transform:translateX(100%);
+
+}
+
+
+}
+
+
 
 
 
 h2{
 
+
 margin-top:30px;
 
+
 margin-bottom:5px;
+
 
 }
 
@@ -150,61 +380,87 @@ margin-bottom:5px;
 
 p{
 
+
 color:#888;
 
+
 }
+
 
 
 
 .progress{
 
+
 width:90%;
+
 
 height:5px;
 
+
 background:#333;
+
 
 border-radius:20px;
 
+
 margin:25px;
 
+
 }
+
 
 
 
 .progress div{
 
+
 width:45%;
+
 
 height:100%;
 
+
 background:white;
+
 
 border-radius:20px;
 
+
 }
+
 
 
 
 .controls{
 
+
 display:flex;
+
 
 align-items:center;
 
+
 gap:35px;
+
 
 }
 
 
 
+
+
 button{
+
 
 border:none;
 
+
 background:none;
 
+
 color:white;
+
 
 }
 
@@ -212,23 +468,33 @@ color:white;
 
 svg{
 
+
 width:32px;
+
 
 height:32px;
 
+
 fill:white;
+
 
 }
 
 
 
+
+
 .play{
+
 
 width:75px;
 
+
 height:75px;
 
+
 border-radius:50%;
+
 
 
 background:
@@ -236,22 +502,37 @@ background:
 rgba(255,255,255,.15);
 
 
-backdrop-filter:blur(20px);
+
+backdrop-filter:
+
+blur(20px);
+
 
 }
+
+
 
 
 
 .play svg{
 
+
 width:38px;
 
+
 height:38px;
+
 
 }
 
 
 
+
+
+
+
+
+/* Bottom Glass Navigation */
 
 
 nav{
@@ -262,21 +543,27 @@ position:absolute;
 
 left:25px;
 
+
 right:25px;
 
 
 bottom:70px;
 
 
+
 height:80px;
+
 
 
 
 display:flex;
 
+
 justify-content:space-around;
 
+
 align-items:center;
+
 
 
 background:
@@ -284,11 +571,18 @@ background:
 rgba(255,255,255,.08);
 
 
-backdrop-filter:blur(30px);
+
+backdrop-filter:
+
+blur(30px);
+
+
 
 
 
 border-radius:30px;
+
+
 
 
 border:
@@ -300,42 +594,62 @@ border:
 
 
 
+
 nav button{
+
 
 display:flex;
 
+
 flex-direction:column;
+
 
 align-items:center;
 
+
 gap:6px;
+
+
 
 opacity:.5;
 
+
 }
+
+
 
 
 
 nav .active{
 
+
 opacity:1;
 
+
 }
+
 
 
 
 nav svg{
 
+
 width:28px;
 
+
 height:28px;
+
 
 }
 
 
 
+
+
 nav span{
 
+
 font-size:12px;
+
 
 }
