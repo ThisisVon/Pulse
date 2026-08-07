@@ -1,46 +1,50 @@
-const buttons = document.querySelectorAll("nav button");
+const tabs = document.querySelectorAll("nav button");
 
 const pages = [
     "home",
+    "explore",
     "search",
     "library"
 ];
 
 
-// Bottom navigation switching
 
-buttons.forEach((button, index) => {
+// PAGE SWITCHING
 
-    button.addEventListener("click", () => {
-
-
-        buttons.forEach(btn => {
-            btn.classList.remove("active");
-        });
+tabs.forEach((tab, index)=>{
 
 
-        button.classList.add("active");
+tab.addEventListener("click", ()=>{
 
 
+    tabs.forEach(button=>{
+        button.classList.remove("active");
+    });
 
-        document.querySelectorAll(".page").forEach(page => {
 
-            page.classList.add("hidden");
-
-        });
+    tab.classList.add("active");
 
 
 
-        const selectedPage = document.getElementById(pages[index]);
+    document.querySelectorAll(".page").forEach(page=>{
 
-        if(selectedPage){
-
-            selectedPage.classList.remove("hidden");
-
-        }
-
+        page.classList.remove("active-page");
 
     });
+
+
+
+    const selected = document.getElementById(pages[index]);
+
+
+    if(selected){
+
+        selected.classList.add("active-page");
+
+    }
+
+
+});
 
 
 });
@@ -48,25 +52,85 @@ buttons.forEach((button, index) => {
 
 
 
-// Splash screen removal
-
-window.addEventListener("load", () => {
 
 
-    setTimeout(() => {
+
+// PLAY / PAUSE BUTTON
 
 
-        const splash = document.querySelector(".splash");
+const playButton = document.querySelector(".play-button");
+
+const playIcon = document.querySelector(".play-icon");
+
+const pauseIcon = document.querySelector(".pause-icon");
 
 
-        if(splash){
 
-            splash.remove();
-
-        }
+let playing = false;
 
 
-    }, 3500);
+
+playButton.addEventListener("click", ()=>{
+
+
+playing = !playing;
+
+
+
+if(playing){
+
+
+playIcon.style.display="none";
+
+
+pauseIcon.style.display="block";
+
+
+
+}
+
+else{
+
+
+playIcon.style.display="block";
+
+
+pauseIcon.style.display="none";
+
+
+}
+
+
+});
+
+
+
+
+
+
+// REMOVE SPLASH SCREEN
+
+
+window.addEventListener("load", ()=>{
+
+
+setTimeout(()=>{
+
+
+const splash =
+document.querySelector(".splash");
+
+
+
+if(splash){
+
+splash.remove();
+
+}
+
+
+},3500);
+
 
 
 });
