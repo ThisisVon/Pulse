@@ -1,14 +1,18 @@
-const button = document.getElementById("play");
-
-let playing = false;
-
-
-button.onclick = () => {
-
-  playing = !playing;
+const buttons =
+document.querySelectorAll("nav button");
 
 
-  button.innerHTML =
-  playing ? "⏸" : "▶";
+buttons.forEach(button=>{
+
+button.onclick=()=>{
+
+buttons.forEach(b=>{
+b.classList.remove("active");
+});
+
+
+button.classList.add("active");
 
 };
+
+});
