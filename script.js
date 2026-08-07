@@ -2,17 +2,41 @@ const buttons =
 document.querySelectorAll("nav button");
 
 
-buttons.forEach(button=>{
+const pages = [
+"home",
+"search",
+"library"
+];
 
-button.onclick=()=>{
 
-buttons.forEach(b=>{
-b.classList.remove("active");
+buttons.forEach((button,index)=>{
+
+
+button.onclick = ()=>{
+
+
+buttons.forEach(btn=>{
+btn.classList.remove("active");
 });
 
 
 button.classList.add("active");
 
+
+
+document.querySelectorAll(".page")
+.forEach(page=>{
+page.classList.add("hidden");
+});
+
+
+
+document
+.getElementById(pages[index])
+.classList.remove("hidden");
+
+
 };
+
 
 });
