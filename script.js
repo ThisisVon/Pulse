@@ -7,11 +7,11 @@ const pages = [
 ];
 
 
-// Bottom navigation
+// Bottom navigation switching
 
 buttons.forEach((button, index) => {
 
-    button.onclick = () => {
+    button.addEventListener("click", () => {
 
 
         buttons.forEach(btn => {
@@ -31,28 +31,42 @@ buttons.forEach((button, index) => {
 
 
 
-        document
-        .getElementById(pages[index])
-        .classList.remove("hidden");
+        const selectedPage = document.getElementById(pages[index]);
+
+        if(selectedPage){
+
+            selectedPage.classList.remove("hidden");
+
+        }
 
 
-    };
+    });
+
 
 });
 
 
 
 
-// Remove splash screen after intro
+// Splash screen removal
 
-setTimeout(() => {
+window.addEventListener("load", () => {
 
-    const splash = document.querySelector(".splash");
 
-    if(splash){
+    setTimeout(() => {
 
-        splash.remove();
 
-    }
+        const splash = document.querySelector(".splash");
 
-}, 3300);
+
+        if(splash){
+
+            splash.remove();
+
+        }
+
+
+    }, 3500);
+
+
+});
