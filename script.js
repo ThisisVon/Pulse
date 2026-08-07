@@ -73,20 +73,19 @@ let playing = false;
 if(playButton){
 
 
-    playButton.addEventListener("click", ()=>{
+playButton.addEventListener("click", ()=>{
 
 
-        playing = !playing;
+    playing = !playing;
 
 
+    playButton.classList.toggle(
+        "playing",
+        playing
+    );
 
-        playButton.classList.toggle(
-            "playing",
-            playing
-        );
 
-
-    });
+});
 
 
 }
@@ -98,40 +97,122 @@ if(playButton){
 
 
 
-// SPLASH ANIMATION
+// PROGRESS BAR
+
+
+const progressBar = document.querySelector(".progress-bar");
+
+const currentTime = document.getElementById("current-time");
+
+const durationText = document.getElementById("duration");
+
+
+
+// Fake song length for now
+
+const songLength = 210;
+
+
+
+if(progressBar){
+
+
+durationText.textContent = formatTime(songLength);
+
+
+
+progressBar.addEventListener("input", ()=>{
+
+
+    const value = Number(progressBar.value);
+
+
+
+    currentTime.textContent = formatTime(value);
+
+
+
+    const percent = (value / songLength) * 100;
+
+
+
+    progressBar.style.background = `linear-gradient(
+        to right,
+        white ${percent}%,
+        #333 ${percent}%,
+        #333 100%
+    )`;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+function formatTime(seconds){
+
+
+const minutes = Math.floor(seconds / 60);
+
+
+const remaining = seconds % 60;
+
+
+return `${minutes}:${remaining
+.toString()
+.padStart(2,"0")}`;
+
+
+}
+
+
+
+
+
+
+
+
+// SPLASH
 
 
 window.addEventListener("load", ()=>{
 
 
-    const splash = document.querySelector(".splash");
+const splash = document.querySelector(".splash");
 
 
 
-    if(splash){
+if(splash){
 
 
-        setTimeout(()=>{
+setTimeout(()=>{
 
 
-            splash.classList.add("hide");
-
-
-
-            setTimeout(()=>{
-
-
-                splash.remove();
-
-
-            },1200);
+splash.classList.add("hide");
 
 
 
-        },2500);
+setTimeout(()=>{
 
 
-    }
+splash.remove();
+
+
+},1200);
+
+
+
+},2500);
+
+
+}
 
 
 });
