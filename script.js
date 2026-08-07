@@ -41,6 +41,7 @@ tabs.forEach((tab, index)=>{
         const selectedPage = document.getElementById(pages[index]);
 
 
+
         if(selectedPage){
 
             selectedPage.classList.add("active-page");
@@ -59,8 +60,7 @@ tabs.forEach((tab, index)=>{
 
 
 
-
-// PLAY BUTTON MORPH
+// PLAY / PAUSE MORPH
 
 
 const playButton = document.querySelector(".play-button");
@@ -73,30 +73,20 @@ let playing = false;
 if(playButton){
 
 
-playButton.addEventListener("click", ()=>{
+    playButton.addEventListener("click", ()=>{
 
 
-    playing = !playing;
+        playing = !playing;
 
 
-    if(playing){
+
+        playButton.classList.toggle(
+            "playing",
+            playing
+        );
 
 
-        playButton.classList.add("playing");
-
-
-    }
-
-    else{
-
-
-        playButton.classList.remove("playing");
-
-
-    }
-
-
-});
+    });
 
 
 }
@@ -108,20 +98,20 @@ playButton.addEventListener("click", ()=>{
 
 
 
-// SPLASH SCREEN
+// SPLASH ANIMATION
 
 
 window.addEventListener("load", ()=>{
 
 
-    setTimeout(()=>{
-
-
-        const splash = document.querySelector(".splash");
+    const splash = document.querySelector(".splash");
 
 
 
-        if(splash){
+    if(splash){
+
+
+        setTimeout(()=>{
 
 
             splash.classList.add("hide");
@@ -137,11 +127,11 @@ window.addEventListener("load", ()=>{
             },1200);
 
 
-        }
+
+        },2500);
 
 
-    },2500);
-
+    }
 
 
 });
