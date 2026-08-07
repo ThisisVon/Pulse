@@ -13,49 +13,51 @@ const pages = [
 
 tabs.forEach((tab, index)=>{
 
+    tab.addEventListener("click", ()=>{
 
-tab.addEventListener("click", ()=>{
+
+        tabs.forEach(button=>{
+
+            button.classList.remove("active");
+
+        });
 
 
-    tabs.forEach(button=>{
-        button.classList.remove("active");
+
+        tab.classList.add("active");
+
+
+
+        document.querySelectorAll(".page").forEach(page=>{
+
+            page.classList.remove("active-page");
+
+        });
+
+
+
+        const selectedPage = document.getElementById(pages[index]);
+
+
+        if(selectedPage){
+
+            selectedPage.classList.add("active-page");
+
+        }
+
+
     });
-
-
-    tab.classList.add("active");
-
-
-
-    document.querySelectorAll(".page").forEach(page=>{
-
-        page.classList.remove("active-page");
-
-    });
-
-
-
-    const selected = document.getElementById(pages[index]);
-
-
-    if(selected){
-
-        selected.classList.add("active-page");
-
-    }
 
 
 });
 
 
-});
 
 
 
 
 
-
-
-// PLAY / PAUSE BUTTON
+// PLAY / PAUSE
 
 
 const playButton = document.querySelector(".play-button");
@@ -65,9 +67,11 @@ const playIcon = document.querySelector(".play-icon");
 const pauseIcon = document.querySelector(".pause-icon");
 
 
-
 let playing = false;
 
+
+
+if(playButton){
 
 
 playButton.addEventListener("click", ()=>{
@@ -82,18 +86,16 @@ if(playing){
 
 playIcon.style.display="none";
 
-
 pauseIcon.style.display="block";
 
 
-
 }
+
 
 else{
 
 
 playIcon.style.display="block";
-
 
 pauseIcon.style.display="none";
 
@@ -101,14 +103,19 @@ pauseIcon.style.display="none";
 }
 
 
+
 });
 
 
+}
 
 
 
 
-// REMOVE SPLASH SCREEN
+
+
+
+// SPLASH FADE
 
 
 window.addEventListener("load", ()=>{
@@ -117,19 +124,31 @@ window.addEventListener("load", ()=>{
 setTimeout(()=>{
 
 
-const splash =
-document.querySelector(".splash");
-
+const splash = document.querySelector(".splash");
 
 
 if(splash){
 
+
+splash.classList.add("hide");
+
+
+
+setTimeout(()=>{
+
+
 splash.remove();
+
+
+},800);
+
+
 
 }
 
 
-},3500);
+
+},2500);
 
 
 
